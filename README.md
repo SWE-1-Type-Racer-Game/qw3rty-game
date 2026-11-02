@@ -4,8 +4,9 @@ A browser-based educational game built with Vite and React, focusing on math wit
 
 ## Team
 
-SWE-1 group project (Software Engineering I, F26).
+SWE-1 group project (Software Engineering I, F26).  
 By Rowan Sharwood, Charlie Sparrow, Marvens Barthelemy, Mayne Murray, Escander Habda  
+
 ## Getting Started
 
 Requirements:
