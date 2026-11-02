@@ -12,10 +12,10 @@ Requirements:
 - Computer
 - Node.js 18.0 or higher
 
-Install: 
-git clone https://github.com/SWE-1-Type-Racer-Game/qw4rty-game.git
-cd qw4rty-game
-npm install
+Install:  
+git clone https://github.com/SWE-1-Type-Racer-Game/qw4rty-game.git  
+cd qw4rty-game  
+npm install  
 npm run dev
 
 ## Planned Features
