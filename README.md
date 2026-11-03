@@ -1,27 +1,16 @@
-# qw4rty-game
+# React + Vite
 
-A browser-based educational game built with Vite and React, focusing on math with plans to expand into other educational game genres.
+This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
-## Team
+Currently, two official plugins are available:
 
-SWE-1 group project (Software Engineering I, F26).  
-By Rowan Sharwood, Charlie Sparrow, Marvens Barthelemy, Mayne Murray, Escander Habda  
+- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
+- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
 
-## Getting Started
+## React Compiler
 
-Requirements:
-- Computer
-- Node.js 18.0 or higher
+The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
 
-Install:  
-git clone https://github.com/SWE-1-Type-Racer-Game/qw4rty-game.git  
-cd qw4rty-game  
-npm install  
-npm run dev
+## Expanding the ESLint configuration
 
-## Planned Features
-
-- Math practice game with timed rounds
-- Additional educational genres in later stages
-
-## Contributing and Legal Stuff
+If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
