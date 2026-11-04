@@ -1,18 +1,18 @@
 import '../styling/PromptDisplay.css'
 
-export function PromptDisplay({ prompt, correct }) {
+export function PromptDisplay({ prompt, correct, incorrect, isIncorrect }) {
     return (
         <div>
             <p className="prompt-display">
-            {prompt.split("").map((word, index) => (
+            {prompt.split("").map((char, index) => (
                 <span
                 key={index}
                 style={{
-                    color: index < correct ? "green" : "white",
+                    color: index < correct ? "green" : index === incorrect && isIncorrect ? "red" : "white",
                     fontFamily: "Courier New, monospace"
                 }}
                 >
-                {word}
+                {char}
                 </span>
             ))}
             </p>
