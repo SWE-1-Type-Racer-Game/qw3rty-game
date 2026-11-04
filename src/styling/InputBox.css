@@ -12,7 +12,9 @@
     height: 100px;
     padding: 16px;
     box-sizing: border-box;
-    resize: vertical;
+    resize: none;
+    border: 3px solid var(--border);
+    border-radius: 10px;
     overflow-y: auto;
     font-family: 'Courier New', monospace;
     font-weight: bold;

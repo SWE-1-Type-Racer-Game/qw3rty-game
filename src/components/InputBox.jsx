@@ -1,6 +1,7 @@
 import '../styling/InputBox.css'
 
 export function InputBox({ onChange, value}) {
+
     return (
         <div className="input-box">
             <textarea
