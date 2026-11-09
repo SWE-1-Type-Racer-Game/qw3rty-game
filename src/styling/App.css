@@ -181,4 +181,11 @@
     right: 0;
     border-right-color: var(--border);
   }
+
+ .back-button {
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+  z-index: 10;
+}
 }
