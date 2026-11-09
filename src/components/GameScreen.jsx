@@ -4,11 +4,12 @@ import { PromptDisplay } from './PromptDisplay.jsx'
 import { useTyping } from '../hooks/useTyping.js'
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { Prompt } from '../classes/Prompt.js'
 
 
 export function GameScreen() {
 
-const prompt = "Type the following text as fast as you can!"
+const prompt = new Prompt("If Jay has 2 apples, and Joan has 3 apples, how many apples do they have altogether? 3 + 2 = 5", "5", "Math", "", false);
 const { inputValue, handleInputChange, correct, incorrect, isIncorrect } = useTyping(prompt);
 
     return (
@@ -17,7 +18,7 @@ const { inputValue, handleInputChange, correct, incorrect, isIncorrect } = useTy
                 Qw4rty
             </h1>
             <PromptDisplay 
-                prompt={prompt}
+                prompt={prompt.text}
                 correct={correct}
                 incorrect={incorrect}
                 isIncorrect={isIncorrect}

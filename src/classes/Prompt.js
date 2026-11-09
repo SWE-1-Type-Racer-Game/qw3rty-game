@@ -1,8 +1,6 @@
-
-
 export class Prompt {
-     constructor(promptText, correctAnswer, category, playerAnswer, isCompleted) {
-        this.text = promptText;
+     constructor(text, correctAnswer, category, playerAnswer, isCompleted) {
+        this.text = text;
         this.correctAnswer = correctAnswer;
         this.category = category;
         this.playerAnswer = playerAnswer;
