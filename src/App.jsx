@@ -2,14 +2,18 @@ import { useState } from 'react'
 import './styling/App.css'
 import { GameScreen } from './components/GameScreen.jsx'
 import MainMenu from './components/MainMenu.jsx'
+import LeaderboardScreen from './components/LeaderboardScreen.jsx'
+import useLeaderboard from './hooks/useLeaderboard.js'
 
 function App() {
   // diagram: -currentScreen: string
   const [currentScreen, setCurrentScreen] = useState('menu')
 
+  const { bestTimes } = useLeaderboard()
+
   // diagram: +handleStartRace(), +handleQuit(), plus a leaderboard handler
   const handleStartRace = () => setCurrentScreen('game')
-  const handleViewHighScores = () => setCurrentScreen('leaderboard')
+  const handleViewLeaderboard = () => setCurrentScreen('leaderboard')
   const handleQuit = () => setCurrentScreen('menu')
 
   return (
@@ -17,7 +21,7 @@ function App() {
       {currentScreen === 'menu' && (
         <MainMenu
           onStart={handleStartRace}
-          onViewHighScores={handleViewHighScores}
+          onViewLeaderboard={handleViewLeaderboard}
         />
       )}
 
@@ -31,10 +35,12 @@ function App() {
       )}
 
       {currentScreen === 'leaderboard' && (
-        <div>
-          <h2>High Scores (coming soon)</h2>
-          <button onClick={handleQuit}>Back to Menu</button>
-        </div>
+        <>
+          <button className="back-button" onClick={handleQuit}>
+            ← Main Menu
+          </button>
+          <LeaderboardScreen bestTimes={bestTimes} />
+        </>
       )}
     </div>
   )
