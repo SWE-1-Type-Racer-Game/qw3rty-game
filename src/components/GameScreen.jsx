@@ -14,7 +14,7 @@ const { inputValue, handleInputChange, correct, incorrect, isIncorrect } = useTy
     return (
         <div className="game-screen">
             <h1 className="game-title">
-                Qw4rty
+                Qw3rty
             </h1>
             <PromptDisplay 
                 prompt={prompt}

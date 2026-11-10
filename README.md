@@ -10,9 +10,10 @@ Requirements:
 - Node.js 18.0 or higher
 
 Install:  
-git clone https://github.com/SWE-1-Type-Racer-Game/qw4rty-game.git  
-cd qw4rty-game  
-npm install  
+git clone https://github.com/SWE-1-Type-Racer-Game/qw3rty-game.git  
+cd qw3rty-game  
+npm install
+npm install react-toastify
 npm run dev
 
 ## Planned Features
