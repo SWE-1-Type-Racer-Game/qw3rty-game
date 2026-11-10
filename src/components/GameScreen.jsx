@@ -7,6 +7,7 @@ import "react-toastify/dist/ReactToastify.css";
 import { Prompt } from '../classes/Prompt.js'
 import { AnswerBox } from './AnswerBox.jsx';
 import { useSubmit } from '../hooks/useSubmit.js';
+import { ProgressBar } from './ProgressBar.jsx';
 
 
 export function GameScreen() {
@@ -17,6 +18,7 @@ const { userAnswer, handleSubmit, clearAnswer } = useSubmit();
 
     return (
         <div className="game-screen">
+            <ProgressBar progress={10} total={100} />
             <h1 className="game-title">
                 Qw3rty
             </h1>
