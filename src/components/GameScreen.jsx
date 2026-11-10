@@ -5,17 +5,20 @@ import { useTyping } from '../hooks/useTyping.js'
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { Prompt } from '../classes/Prompt.js'
+import { AnswerBox } from './AnswerBox.jsx';
+import { useSubmit } from '../hooks/useSubmit.js';
 
 
 export function GameScreen() {
 
-const prompt = new Prompt("If Jay has 2 apples, and Joan has 3 apples, how many apples do they have altogether? 3 + 2 = 5", "5", "Math", "", false);
-const { inputValue, handleInputChange, correct, incorrect, isIncorrect } = useTyping(prompt);
+const prompt = new Prompt("test", "5", "Math", false);
+const { inputValue, handleInputChange, correct, incorrect, isIncorrect, isComplete } = useTyping(prompt);
+const { userAnswer, handleSubmit, clearAnswer } = useSubmit();
 
     return (
         <div className="game-screen">
-            <h1 className="game-title">
-                Qw4rty
+            <h1 className="game-title" fontFamily="Courier New, monospace">
+                Qw3rty
             </h1>
             <PromptDisplay 
                 prompt={prompt.text}
@@ -23,6 +26,7 @@ const { inputValue, handleInputChange, correct, incorrect, isIncorrect } = useTy
                 incorrect={incorrect}
                 isIncorrect={isIncorrect}
              />
+             <AnswerBox isComplete={isComplete} userAnswer={userAnswer} answer={prompt.correctAnswer} onChange={handleSubmit} onClear={clearAnswer} />
             <InputBox
                 onChange={handleInputChange}
                 value={inputValue}

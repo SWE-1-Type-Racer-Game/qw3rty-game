@@ -37,7 +37,7 @@ export function useTyping(prompt) {
             console.log("Incorrect input detected. Displaying toast notification.");
             toast.error("Incorrect input! Please try again.", {
                 position: "top-center",
-                autoClose: 3000,
+                autoClose: 1000,
             });
         }
     }, [isIncorrect]);
@@ -47,5 +47,7 @@ export function useTyping(prompt) {
     while(correct < inputValue.length && correct < prompt.text.length && inputValue[correct] === prompt.text[correct]) {
         correct++;
     }
-    return { inputValue, handleInputChange, correct, incorrect, isIncorrect };
+    const isComplete = correct === prompt.text.length;
+
+    return { inputValue, handleInputChange, correct, incorrect, isIncorrect, isComplete };
 }
