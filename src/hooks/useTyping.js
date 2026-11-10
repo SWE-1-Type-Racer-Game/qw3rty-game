@@ -18,7 +18,7 @@ export function useTyping(prompt) {
         }
 
         // reject anything that isn't a correct prefix of the prompt
-        if (!prompt.startsWith(newValue) && isIncorrect === false) {
+        if (!prompt.text.startsWith(newValue) && isIncorrect === false) {
             setInputValue(newValue); // allow user to type one incorrect character, then flag incorrect
             setIncorrect(newValue.length - 1); // index of the first incorrect character
             setIsIncorrect(true);
@@ -37,15 +37,17 @@ export function useTyping(prompt) {
             console.log("Incorrect input detected. Displaying toast notification.");
             toast.error("Incorrect input! Please try again.", {
                 position: "top-center",
-                autoClose: 3000,
+                autoClose: 1000,
             });
         }
     }, [isIncorrect]);
 
     // checks how many characters are correct
     let correct = 0;
-    while(correct < inputValue.length && correct < prompt.length && inputValue[correct] === prompt[correct]) {
+    while(correct < inputValue.length && correct < prompt.text.length && inputValue[correct] === prompt.text[correct]) {
         correct++;
     }
-    return { inputValue, handleInputChange, correct, incorrect, isIncorrect };
+    const isComplete = correct === prompt.text.length;
+
+    return { inputValue, handleInputChange, correct, incorrect, isIncorrect, isComplete };
 }
