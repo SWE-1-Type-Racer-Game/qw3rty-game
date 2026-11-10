@@ -47,5 +47,13 @@ export function useTyping(prompt) {
     while(correct < inputValue.length && correct < prompt.length && inputValue[correct] === prompt[correct]) {
         correct++;
     }
-    return { inputValue, handleInputChange, correct, incorrect, isIncorrect };
+
+    // Return function
+    const resetTyping = () => {
+        setInputValue('')
+        setIsIncorrect(false)
+        setIncorrect(0)
+    }
+
+    return { inputValue, handleInputChange, correct, incorrect, isIncorrect, resetTyping };
 }
