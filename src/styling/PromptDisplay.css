@@ -1,4 +1,6 @@
 .prompt-display {
+    user-select: none;
+    -webkit-user-select: none;
     width: 100%;
     text-align: center;
     border: 3px solid var(--border);

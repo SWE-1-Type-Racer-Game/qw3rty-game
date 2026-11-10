@@ -7,14 +7,18 @@ import { useRace } from '../hooks/useRace.js'
 import { useTimer } from '../hooks/useTimer.js'
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { Prompt } from '../classes/Prompt.js'
+import { AnswerBox } from './AnswerBox.jsx';
+import { useSubmit } from '../hooks/useSubmit.js';
+import { ProgressBar } from './ProgressBar.jsx';
 
 
 export function GameScreen() {
-
-    const prompt = "Type the following text as fast as you can!"
+    const prompt = new Prompt("test", "5", "Math", false);
     const typing = useTyping(prompt)
     const race = useRace()
     const timer = useTimer(60)
+    const { userAnswer, handleSubmit, clearAnswer } = useSubmit()
 
     const { status, score, startRace, pauseRace, resumeRace, endRace, resetRace, incrementCharacterCount, incrementTypoCount } = race
     const { timeLeft, isFinished, startTimer, pauseTimer, resumeTimer, endTimer, resetTimer } = timer
@@ -30,6 +34,7 @@ export function GameScreen() {
 
     const handleStart = () => {
         typing.resetTyping()
+        clearAnswer()
         startRace()
         resetTimer()
         startTimer()
@@ -47,57 +52,74 @@ export function GameScreen() {
 
     const handleReset = () => {
         typing.resetTyping()
+        clearAnswer()
         resetRace()
         resetTimer()
     }
 
     const handleChange = (event) => {
-        if (status !== 'running') return
+        if (status !== 'running' || isFinished || typing.isComplete) return
 
         const nextValue = event.target.value
         const previousValue = typing.inputValue
         const isAdding = nextValue.length > previousValue.length
 
         // useTyping accepts one incorrect character, then blocks additions.
-        const isNewTypo = isAdding && !typing.isIncorrect && !prompt.startsWith(nextValue)
+        const isNewTypo = isAdding && !typing.isIncorrect && !prompt.text.startsWith(nextValue)
 
         if (isNewTypo) {
             incrementTypoCount()
         }
 
         typing.handleInputChange(event)
-
-        // additions are blocked after an error.
-        const additionIsBlocked = isAdding && typing.isIncorrect
-
-        if (!additionIsBlocked && nextValue === prompt) {
-            incrementCharacterCount(prompt.length)
-            endRace()
-            endTimer()
-        }
     }
+    
+    const handleCorrectAnswer = () => {
+        if (status !== 'running' || isFinished) return
 
-
+        incrementCharacterCount(prompt.text.length)
+        endRace()
+        endTimer()
+    }
+    
     return (
         <div className="game-screen">
-            <h1 className="game-title">
-                Qw4rty
-            </h1>
+            <ProgressBar
+                progress={typing.correct}
+                total={prompt.text.length}
+            />
+
+            <h1 className="game-title">Qw3rty</h1>
 
             <p>Time left: {timeLeft}s</p>
 
-            <PromptDisplay 
-                prompt={prompt}
+            <PromptDisplay
+                prompt={prompt.text}
                 correct={typing.correct}
                 incorrect={typing.incorrect}
                 isIncorrect={typing.isIncorrect}
-             />
+            />
 
             <InputBox
                 onChange={handleChange}
                 value={typing.inputValue}
-                disabled={status !== 'running'}
+                disabled={
+                    status !== 'running' ||
+                    isFinished ||
+                    typing.isComplete
+                }
             />
+
+            {status === 'running' && !isFinished && (
+                <AnswerBox
+                    isComplete={typing.isComplete}
+                    userAnswer={userAnswer}
+                    answer={prompt.correctAnswer}
+                    onChange={handleSubmit}
+                    onClear={clearAnswer}
+                    onCorrect={handleCorrectAnswer}
+                />
+            )}
 
             {/* Status buttons */}
             {status === 'idle' && (<button onClick={handleStart}>Start Race</button>)}
