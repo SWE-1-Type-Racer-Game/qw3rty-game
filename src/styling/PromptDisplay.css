@@ -2,9 +2,14 @@
     user-select: none;
     -webkit-user-select: none;
     width: 100%;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 16px;
     text-align: center;
     border: 3px solid var(--border);
-    border-radius: 10px;
-    padding: 10px;
-    font-family: 'Courier New', monospace;
+    border-radius: var(--radius);
+    font-family: var(--game-font);
+    font-size: 22px;
+    font-weight: bold;
+    line-height: 1.4;
 }

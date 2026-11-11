@@ -8,8 +8,7 @@ export function PromptDisplay({ prompt, correct, incorrect, isIncorrect }) {
                 <span
                 key={index}
                 style={{
-                    color: index < correct ? "green" : index === incorrect && isIncorrect ? "red" : "white",
-                    fontFamily: "Courier New, monospace"
+                    color: index < correct ? "green" : index === incorrect && isIncorrect ? "red" : "var(--text-h)",
                 }}
                 >
                 {char}

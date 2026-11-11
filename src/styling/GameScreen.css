@@ -1,12 +1,71 @@
-.game-title {
-    padding-top: 10px;
-    font-family: 'Courier New', monospace;
-}
-
 .game-screen {
     flex-grow: 1;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    gap: var(--space);
+    width: 100%;
+    max-width: var(--content-width);
+    margin: 0 auto;
+    padding: 72px 16px 40px;
+    box-sizing: border-box;
+}
+
+/* every direct child spans the same content width */
+.game-screen > * {
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.game-screen > button {
+    width: auto;
+}
+
+.game-title {
+    margin: 0;
+    font-family: var(--game-font);
+}
+
+.time-left {
+    width: auto;
+    padding: 8px 20px;
+    border: 3px solid var(--border);
+    border-radius: var(--radius);
+    font-family: var(--game-font);
+    font-size: 20px;
+    font-weight: bold;
+    color: var(--text-h);
+}
+
+.time-left-value {
+    color: var(--accent);
+}
+
+.results {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    padding: var(--space);
+    border: 3px solid var(--accent-border);
+    border-radius: var(--radius);
+    background: var(--accent-bg);
+    font-family: var(--game-font);
+}
+
+.results h2 {
+    margin: 0;
+    font-family: var(--game-font);
+    font-weight: bold;
+}
+
+.results p {
+    font-size: 18px;
+    font-weight: bold;
+    color: var(--text-h);
+}
+
+.results button {
+    margin-top: 8px;
 }

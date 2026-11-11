@@ -2,9 +2,6 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-top: 300px;
-    margin-left: 20px;
-    width: 980px;
 }
 
 .input-box textarea {
@@ -14,9 +11,21 @@
     box-sizing: border-box;
     resize: none;
     border: 3px solid var(--border);
-    border-radius: 10px;
+    border-radius: var(--radius);
+    background: var(--bg);
+    color: var(--text-h);
     overflow-y: auto;
-    font-family: 'Courier New', monospace;
+    font-family: var(--game-font);
+    font-size: 18px;
     font-weight: bold;
     line-height: 1.4;
+}
+
+.input-box textarea:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+}
+
+.input-box textarea:disabled {
+    opacity: 0.6;
 }

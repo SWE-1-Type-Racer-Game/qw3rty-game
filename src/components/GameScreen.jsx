@@ -14,7 +14,7 @@ import { ProgressBar } from './ProgressBar.jsx';
 
 
 export function GameScreen() {
-    const prompt = new Prompt("test", "5", "Math", false);
+    const prompt = new Prompt("Joe has 5 apples. Joe eats 2 apples. How many apples does Joe have left?", "3", "Math", false);
     const typing = useTyping(prompt)
     const race = useRace()
     const timer = useTimer(60)
@@ -84,14 +84,16 @@ export function GameScreen() {
     
     return (
         <div className="game-screen">
+            <h1 className="game-title">Qw3rty</h1>
+
             <ProgressBar
                 progress={typing.correct}
                 total={prompt.text.length}
             />
 
-            <h1 className="game-title">Qw3rty</h1>
-
-            <p>Time left: {timeLeft}s</p>
+            <p className="time-left">
+                Time left: <span className="time-left-value">{timeLeft}s</span>
+            </p>
 
             <PromptDisplay
                 prompt={prompt.text}
@@ -127,7 +129,7 @@ export function GameScreen() {
             {status === 'paused' && (<button onClick={handleResume}>Resume</button>)}
 
             {status === 'finished' && (
-                <div>
+                <div className="results">
                     <h2>Results!</h2>
                     <p>Score: {score}</p>
                     <p>Typos: {race.typoCount}</p>

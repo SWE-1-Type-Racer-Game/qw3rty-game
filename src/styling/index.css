@@ -109,3 +109,47 @@ code {
   padding: 4px 8px;
   background: var(--code-bg);
 }
+
+/* Shared app tokens */
+:root {
+  --game-font: 'Courier New', monospace;
+  --content-width: 760px;
+  --radius: 10px;
+  --space: 24px;
+}
+
+/* Shared button style used across every screen */
+button {
+  min-width: 200px;
+  padding: 12px 28px;
+  border: 3px solid var(--accent-border);
+  border-radius: var(--radius);
+  background: var(--accent-bg);
+  color: var(--accent);
+  font-family: var(--game-font);
+  font-size: 18px;
+  font-weight: bold;
+  letter-spacing: 0.5px;
+  cursor: pointer;
+  transition: border-color 0.2s, box-shadow 0.2s, transform 0.1s;
+}
+
+button:hover {
+  border-color: var(--accent);
+  box-shadow: var(--shadow);
+}
+
+button:active {
+  transform: translateY(1px);
+}
+
+button:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  box-shadow: none;
+}
