@@ -1,25 +1,35 @@
+
 import { useState } from 'react'
 
 function useLeaderboard() {
     // Store leaderboard entries in React state
-    const [bestTimes, setBestTimes] = useState([
-        { time: 10.00, date: '11/9/2026' },
-        { time: 20.00, date: '11/8/2026' },
-        { time: 30.00, date: '11/7/2026' },
-        { time: 40.00, date: '11/6/2026' },
-        { time: 50.00, date: '11/5/2026' }
-    ])
+    const [bestTimes, setBestTimes] = useState([])
 
     // Add a completed race and its date
+    const addResult = (time) => {
+        const newEntry = {
+            time: time,
+            date: new Date().toLocaleDateString()
+        }
 
-    // Sort by fastest completion time
+        setBestTimes((prevBestTimes) => {
+            const updatedTimes = [...prevBestTimes, newEntry]
 
-    // Keep only the top five
+            // Sort by fastest completion time
+            updatedTimes.sort((a, b) => a.time - b.time)
+
+            // Keep only the top five
+            return updatedTimes.slice(0, 5)
+        })
+    }
 
     // Clear leaderboard entries
+    const clearLeaderboard = () => {
+        setBestTimes([])
+    }
 
     // Return the data and functions
-    return { bestTimes }
+    return { bestTimes, addResult, clearLeaderboard }
 }
 
 export default useLeaderboard
