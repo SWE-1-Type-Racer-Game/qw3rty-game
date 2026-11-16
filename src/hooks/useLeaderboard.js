@@ -3,7 +3,13 @@ import { useState } from 'react'
 
 function useLeaderboard() {
     // Store leaderboard entries in React state
-    const [bestTimes, setBestTimes] = useState([])
+    const [bestTimes, setBestTimes] = useState([
+        { time: 10.00, date: '2/28/2026' },
+        { time: 20.00, date: '9/15/2026' },
+        { time: 85.00, date: '11/9/2026' },
+        { time: 97.69, date: '11/8/2026' },
+        { time: 104.44, date: '1/1/2027' }
+    ])
 
     // Add a completed race and its date
     const addResult = (time) => {
