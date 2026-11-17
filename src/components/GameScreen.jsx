@@ -1,6 +1,5 @@
 import { InputBox } from './InputBox.jsx'
 import '../styling/GameScreen.css'
-import { useEffect } from 'react'
 import { PromptDisplay } from './PromptDisplay.jsx'
 import { useTyping } from '../hooks/useTyping.js'
 import { useRace } from '../hooks/useRace.js'
@@ -17,20 +16,11 @@ export function GameScreen() {
     const prompt = new Prompt("Joe has 5 apples. Joe eats 2 apples. How many apples does Joe have left?", "3", "Math", false);
     const typing = useTyping(prompt)
     const race = useRace()
-    const timer = useTimer(60)
+    const timer = useTimer()
     const { userAnswer, handleSubmit, clearAnswer } = useSubmit()
 
     const { status, score, startRace, pauseRace, resumeRace, endRace, resetRace, incrementCharacterCount, incrementTypoCount } = race
-    const { timeLeft, isFinished, startTimer, pauseTimer, resumeTimer, endTimer, resetTimer } = timer
-
-    // Finish the race when the countdown reaches zero.
-    useEffect(() => {
-        if (isFinished && status === 'running') {
-            // Credit the correct text remaining when time expires.
-            incrementCharacterCount(typing.correct)
-            endRace()
-        }
-    }, [isFinished, status, typing.correct, incrementCharacterCount, endRace])
+    const {elapsedSeconds, startTimer, pauseTimer, resumeTimer, endTimer, resetTimer} = timer
 
     const handleStart = () => {
         typing.resetTyping()
@@ -58,7 +48,7 @@ export function GameScreen() {
     }
 
     const handleChange = (event) => {
-        if (status !== 'running' || isFinished || typing.isComplete) return
+        if (status !== 'running' || typing.isComplete) return
 
         const nextValue = event.target.value
         const previousValue = typing.inputValue
@@ -75,7 +65,7 @@ export function GameScreen() {
     }
     
     const handleCorrectAnswer = () => {
-        if (status !== 'running' || isFinished) return
+        if (status !== 'running' || !typing.isComplete) return
 
         incrementCharacterCount(prompt.text.length)
         endRace()
@@ -92,7 +82,7 @@ export function GameScreen() {
             />
 
             <p className="time-left">
-                Time left: <span className="time-left-value">{timeLeft}s</span>
+                Time elapsed: <span className="time-left-value">{elapsedSeconds}s</span>
             </p>
 
             <PromptDisplay
@@ -107,12 +97,11 @@ export function GameScreen() {
                 value={typing.inputValue}
                 disabled={
                     status !== 'running' ||
-                    isFinished ||
                     typing.isComplete
                 }
             />
 
-            {status === 'running' && !isFinished && (
+            {status === 'running' && (
                 <AnswerBox
                     isComplete={typing.isComplete}
                     userAnswer={userAnswer}
