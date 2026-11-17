@@ -40,6 +40,11 @@ export function GameScreen({ onQuit }) {
         resumeTimer()
     }
 
+    const handleQuit = () => {
+        handleReset()
+        onQuit()
+    }
+
     const handleReset = () => {
         typing.resetTyping()
         clearAnswer()
@@ -47,10 +52,7 @@ export function GameScreen({ onQuit }) {
         resetTimer()
     }
 
-    const handleQuit = () => {
-        onQuit()
-    }
-
+    
     const handleChange = (event) => {
         if (status !== 'running' || typing.isComplete) return
 
@@ -115,6 +117,8 @@ export function GameScreen({ onQuit }) {
                     onCorrect={handleCorrectAnswer}
                 />
             )}
+
+            
 
             {/* Status buttons */}
             {status === 'idle' && (<button onClick={handleStart}>Start Race</button>)}
