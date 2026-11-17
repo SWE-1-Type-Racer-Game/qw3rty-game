@@ -37,7 +37,7 @@ export function AnswerBox({ isComplete, userAnswer, answer, onChange, onCorrect,
                         value={userAnswer}
                         disabled={result === 'correct'}
                         maxLength={10}
-                        placeholder="Type your answer..."
+                        placeholder="Now solve the word problem!"
                         rows={1}
                     />
                     {result === 'correct' && (

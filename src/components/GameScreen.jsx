@@ -10,9 +10,9 @@ import { Prompt } from '../classes/Prompt.js'
 import { AnswerBox } from './AnswerBox.jsx';
 import { useSubmit } from '../hooks/useSubmit.js';
 import { ProgressBar } from './ProgressBar.jsx';
+import { PauseModal } from './PauseModal.jsx'
 
-
-export function GameScreen() {
+export function GameScreen({ onQuit }) {
     const prompt = new Prompt("Joe has 5 apples. Joe eats 2 apples. How many apples does Joe have left?", "3", "Math", false);
     const typing = useTyping(prompt)
     const race = useRace()
@@ -45,6 +45,10 @@ export function GameScreen() {
         clearAnswer()
         resetRace()
         resetTimer()
+    }
+
+    const handleQuit = () => {
+        onQuit()
     }
 
     const handleChange = (event) => {
@@ -115,7 +119,12 @@ export function GameScreen() {
             {/* Status buttons */}
             {status === 'idle' && (<button onClick={handleStart}>Start Race</button>)}
             {status === 'running' && (<button onClick={handlePause}>Pause</button>)}
-            {status === 'paused' && (<button onClick={handleResume}>Resume</button>)}
+            {status === 'paused' && (
+                <PauseModal onResume={handleResume}
+                onRestart={handleReset}
+                onQuit={handleQuit} 
+                />
+            )}
 
             {status === 'finished' && (
                 <div className="results">
