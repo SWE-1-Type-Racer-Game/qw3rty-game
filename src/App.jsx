@@ -30,7 +30,9 @@ function App() {
           <button className="back-button" onClick={handleQuit}>
             ← Main Menu
           </button>
-          <GameScreen />
+          <GameScreen 
+            onQuit={handleQuit}
+          />
         </>
       )}
 
