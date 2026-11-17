@@ -30,13 +30,7 @@ function App() {
           <button className="back-button" onClick={handleQuit}>
             ← Main Menu
           </button>
-<<<<<<< HEAD
           <GameScreen onQuit={handleQuit} />
-=======
-          <GameScreen 
-            onQuit={handleQuit}
-          />
->>>>>>> implementPauseModal
         </>
       )}
 
