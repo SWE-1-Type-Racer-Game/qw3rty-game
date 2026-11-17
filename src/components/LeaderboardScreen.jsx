@@ -5,25 +5,29 @@ function LeaderboardScreen({ bestTimes }) {
     return (
         <div className="leaderboard-screen">
             <h1>Leaderboard</h1>
-            <h2>Your Top 5 Fastest Times!</h2>
+            <h2>Your Top 5 Highest Scores!</h2>
 
+            {/* display the top five leaderboard scores */}
             <table className="leaderboard-table">
                 <thead>
                     <tr>
                         <th>Rank</th>
                         <th>Date</th>
-                        <th>Time (mm:ss.ms)</th>
+                        <th>Score</th>
+                        <th>Time Elapsed</th>
                     </tr>
                 </thead>
 
                 <tbody>
+                    {/* display each score and its race information */}
                     {bestTimes.map((entry, index) => (
                         <tr key={index}>
                             <td><b>{index + 1}</b></td>
                             <td>{entry.date}</td>
+                            <td>{entry.score}</td>
                             <td>
                                 {Math.floor(entry.time / 60)}:{(entry.time % 60).toFixed(2).padStart(5, '0')}
-                                </td>
+                            </td>
                         </tr>
                     ))}
                 </tbody>
