@@ -11,7 +11,7 @@ const MainMenu = ({ onStart, onViewLeaderboard }) => {
       <h1>Qw3rty</h1>
       <div className="main-menu-buttons">
         {/* props from App (diagram: +onStart, +onViewLeaderboard) */}
-        <button onClick={onStart}>Start Race</button>
+        <button onClick={onStart}>Begin Racing!</button>
         <button onClick={onViewLeaderboard}>Leaderboard</button>
         <button onClick={() => setShowInstructions(true)}>Instructions</button>
       </div>

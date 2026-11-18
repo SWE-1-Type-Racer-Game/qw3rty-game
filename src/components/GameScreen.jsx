@@ -12,9 +12,10 @@ import { prompts } from './Prompts.jsx'
 import { AnswerBox } from './AnswerBox.jsx';
 import { useSubmit } from '../hooks/useSubmit.js';
 import { ProgressBar } from './ProgressBar.jsx';
+import { PauseModal } from './PauseModal.jsx'
 
 
-export function GameScreen() {
+export function GameScreen(onQuit) {
     const [promptIndex, setPromptIndex] = React.useState(0)
     const selectedPrompt = prompts[promptIndex]
 
@@ -46,6 +47,11 @@ export function GameScreen() {
         resumeTimer()
     }
 
+    const handleQuit = () => {
+        handleReset()
+        onQuit()
+    }
+
     const handleReset = () => {
         setPromptIndex(0)
         typing.resetTyping()
@@ -54,6 +60,7 @@ export function GameScreen() {
         resetTimer()
     }
 
+    
     const handleChange = (event) => {
         if (status !== 'running' || typing.isComplete) return
 
@@ -129,10 +136,17 @@ export function GameScreen() {
                 />
             )}
 
+            
+
             {/* Status buttons */}
             {status === 'idle' && (<button onClick={handleStart}>Start Race</button>)}
             {status === 'running' && (<button onClick={handlePause}>Pause</button>)}
-            {status === 'paused' && (<button onClick={handleResume}>Resume</button>)}
+            {status === 'paused' && (
+                <PauseModal onResume={handleResume}
+                onRestart={handleReset}
+                onQuit={handleQuit} 
+                />
+            )}
 
             {status === 'finished' && (
                 <div className="results">
