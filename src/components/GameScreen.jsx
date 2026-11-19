@@ -1,5 +1,6 @@
 import { InputBox } from './InputBox.jsx'
 import '../styling/GameScreen.css'
+import React from 'react'
 import { PromptDisplay } from './PromptDisplay.jsx'
 import { useTyping } from '../hooks/useTyping.js'
 import { useRace } from '../hooks/useRace.js'
@@ -7,14 +8,20 @@ import { useTimer } from '../hooks/useTimer.js'
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { Prompt } from '../classes/Prompt.js'
+import { prompts } from './Prompts.jsx'
 import { AnswerBox } from './AnswerBox.jsx';
 import { useSubmit } from '../hooks/useSubmit.js';
 import { ProgressBar } from './ProgressBar.jsx';
 import { PauseModal } from './PauseModal.jsx'
 
-export function GameScreen({ onQuit }) {
-    const prompt = new Prompt("Joe has 5 apples. Joe eats 2 apples. How many apples does Joe have left?", "3", "Math", false);
+
+export function GameScreen(onQuit) {
+    const [promptIndex, setPromptIndex] = React.useState(0)
+    const selectedPrompt = prompts[promptIndex]
+
+    const prompt = new Prompt(selectedPrompt.text, selectedPrompt.correctAnswer, selectedPrompt.category, selectedPrompt.isCompleted)
     const typing = useTyping(prompt)
+
     const race = useRace()
     const timer = useTimer()
     const { userAnswer, handleSubmit, clearAnswer } = useSubmit()
@@ -46,6 +53,7 @@ export function GameScreen({ onQuit }) {
     }
 
     const handleReset = () => {
+        setPromptIndex(0)
         typing.resetTyping()
         clearAnswer()
         resetRace()
@@ -73,9 +81,18 @@ export function GameScreen({ onQuit }) {
     const handleCorrectAnswer = () => {
         if (status !== 'running' || !typing.isComplete) return
 
+        
         incrementCharacterCount(prompt.text.length)
-        endRace()
-        endTimer()
+
+        if (promptIndex === prompts.length - 1) {
+            endRace()
+            endTimer()
+            return
+        }
+
+        typing.resetTyping()
+        clearAnswer()
+        setPromptIndex(promptIndex + 1)
     }
     
     return (
@@ -109,6 +126,7 @@ export function GameScreen({ onQuit }) {
 
             {status === 'running' && (
                 <AnswerBox
+                    key={promptIndex}
                     isComplete={typing.isComplete}
                     userAnswer={userAnswer}
                     answer={prompt.correctAnswer}
