@@ -15,7 +15,9 @@ import { ProgressBar } from './ProgressBar.jsx';
 import { PauseModal } from './PauseModal.jsx'
 
 export function GameScreen({ onQuit, onViewLeaderboard }) {
-    const prompt = new Prompt("Joe has 5 apples. Joe eats 2 apples. How many apples does Joe have left?", "3", "Math", false);
+    const [promptIndex, setPromptIndex] = React.useState(0)
+    const selectedPrompt = prompts[promptIndex]
+    const prompt = new Prompt(selectedPrompt.text, selectedPrompt.correctAnswer, selectedPrompt.category, selectedPrompt.isCompleted)
     const typing = useTyping(prompt)
 
     const race = useRace()
