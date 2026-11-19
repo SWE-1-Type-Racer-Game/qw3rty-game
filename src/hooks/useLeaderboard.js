@@ -6,9 +6,9 @@ function useLeaderboard() {
     const [bestTimes, setBestTimes] = useState([
         { time: 10.00, score: 1000, date: '2/28/2026' },
         { time: 20.00, score: 950, date: '9/15/2026' },
-        { time: 85.00, score: 900, date: '11/9/2026' },
+        { time: 85.00, score: 950, date: '11/9/2026' },
         { time: 97.69, score: 850, date: '11/8/2026' },
-        { time: 104.44, score: 800, date: '1/1/2027' }
+        { time: 77.77, score: 777, date: '7/7/2027' }
     ])
 
     // Add a completed race and its date
