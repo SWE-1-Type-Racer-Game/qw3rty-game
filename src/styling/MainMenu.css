@@ -51,3 +51,14 @@
 .instructions-modal p {
     color: var(--text-h);
 }
+
+.instructions-modal ol {
+    margin: 0;
+    padding-left: 1.25em;
+    text-align: left;
+    color: var(--text-h);
+}
+
+.instructions-modal li + li {
+    margin-top: 8px;
+}
