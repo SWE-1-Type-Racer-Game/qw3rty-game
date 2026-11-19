@@ -14,12 +14,8 @@ import { useSubmit } from '../hooks/useSubmit.js';
 import { ProgressBar } from './ProgressBar.jsx';
 import { PauseModal } from './PauseModal.jsx'
 
-
-export function GameScreen(onQuit) {
-    const [promptIndex, setPromptIndex] = React.useState(0)
-    const selectedPrompt = prompts[promptIndex]
-
-    const prompt = new Prompt(selectedPrompt.text, selectedPrompt.correctAnswer, selectedPrompt.category, selectedPrompt.isCompleted)
+export function GameScreen({ onQuit, onViewLeaderboard }) {
+    const prompt = new Prompt("Joe has 5 apples. Joe eats 2 apples. How many apples does Joe have left?", "3", "Math", false);
     const typing = useTyping(prompt)
 
     const race = useRace()
@@ -94,6 +90,11 @@ export function GameScreen(onQuit) {
         clearAnswer()
         setPromptIndex(promptIndex + 1)
     }
+
+    const handleViewLeaderboard = () => {
+        handleReset()
+        onViewLeaderboard()
+    }
     
     return (
         <div className="game-screen">
@@ -154,6 +155,8 @@ export function GameScreen(onQuit) {
                     <p>Score: {score}</p>
                     <p>Typos: {race.typoCount}</p>
                     <button onClick={handleReset}>Play Again</button>
+                    <button onClick={handleViewLeaderboard}>View Leaderboard</button>
+                    <button onClick={handleQuit}>Quit</button>
                 </div>
             )}
 
